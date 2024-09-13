@@ -5,6 +5,6 @@ terraform {
     bucket         = "adex-terraform-state"
     dynamodb_table = "adex-terraform-state"
     acl            = "bucket-owner-full-control"
-    encrypt = true
+    encrypt        = true
   }
 }

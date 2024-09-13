@@ -31,21 +31,21 @@ variable "project_prefix" {
 ########################
 
 variable "vpc_id" {
-  type = string
+  type        = string
   description = "The vpc id provided statically"
-  default = ""
+  default     = ""
 }
 
 variable "public_subnets_id" {
-  type = list
+  type        = list(any)
   description = "The subnet ids of the public subnets provided statically"
-  default = []
+  default     = []
 }
 
 variable "private_subnets_id" {
-  type = list
+  type        = list(any)
   description = "The subnet ids of the private subnets provided statically"
-  default = []
+  default     = []
 }
 
 variable "vpc_cidr" {

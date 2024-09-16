@@ -26,4 +26,8 @@ locals {
   vpc_id = local.vpc.create_vpc != true ? var.vpc_id : module.vpc.vpc_id
   public_subnets_id = local.vpc.create_vpc != true ? var.public_subnets_id : module.vpc.public_subnets
   private_subnets = local.vpc.create_vpc != true ? var.private_subnets_id : module.vpc.private_subnets
+
+  ecs = {
+    cluster_name = module.naming.resources.ecs-cluster.name
+  }
 }

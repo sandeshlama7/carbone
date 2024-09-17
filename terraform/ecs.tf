@@ -2,7 +2,7 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
-    cluster_name = local.ecs.cluster_name
+  cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
     execute_command_configuration = {
@@ -22,26 +22,37 @@ module "ecs" {
 
   }
 
-#   services = {
-#     carbone-service = {
-#         cpu = 512
-#         memory = 1024
+  services = {
+    carbone-service = {
+      cpu    = 512
+      memory = 1024
 
-#         container_definitions = {
-#             carbone-api = {
-#                 cpu = 512
-#                 memory = 1024
-#                 image = carbone/carbone-ee
-#                 port_mappings = [
-#                     {
-#                         name = "carbone-api"
-#                         containerPort = 4000
-#                         protocol = "tcp"
-#                     }
-#                 ]
-#             }
-#         }
-#     }
-#   }
-
+        container_definitions = {
+          carbone-api = {
+            readonly_root_filesystem = false
+            cpu                      = 512
+            memory                   = 1024
+            image                    = "426857564226.dkr.ecr.us-east-1.amazonaws.com/prop-gen/pg:latest"
+            port_mappings = [
+              {
+                name          = "carbone-api"
+                containerPort = 4000
+                protocol      = "tcp"
+              }
+            ]
+          }
+        }
+      load_balancer = {
+        service = {
+          target_group_arn = module.alb.target_group_arns[0]
+          container_name   = "carbone-api"
+          container_port   = 4000
+        }
+      }
+      create_security_group = local.ecs.create_security_group
+      subnet_ids            = local.private_subnets_id
+      security_group_ids    = [module.ecs_sg.security_group_id]
+      }
+    }
+  
 }

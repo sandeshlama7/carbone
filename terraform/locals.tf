@@ -23,11 +23,52 @@ locals {
     enable_flow_log      = false
     number_of_azs        = var.number_of_azs
   }
-  vpc_id = local.vpc.create_vpc != true ? var.vpc_id : module.vpc.vpc_id
-  public_subnets_id = local.vpc.create_vpc != true ? var.public_subnets_id : module.vpc.public_subnets
-  private_subnets = local.vpc.create_vpc != true ? var.private_subnets_id : module.vpc.private_subnets
+  vpc_id             = local.vpc.create_vpc != true ? var.vpc_id : module.vpc.vpc_id
+  public_subnets_id  = local.vpc.create_vpc != true ? var.public_subnets_id : module.vpc.public_subnets
+  private_subnets_id = local.vpc.create_vpc != true ? var.private_subnets_id : module.vpc.private_subnets
 
   ecs = {
-    cluster_name = module.naming.resources.ecs-cluster.name
+    cluster_name          = module.naming.resources.ecs-cluster.name
+    create_security_group = false
+  }
+
+  ecr = {
+    repository_name = module.naming.resources.ecr.name
+  }
+
+  alb = {
+    name               = module.naming.resources.alb.name
+    vpc_id             = local.vpc_id
+    subnets            = local.public_subnets_id
+    load_balancer_type = "application"
+    internal           = false
+
+    http_tcp_listeners = {
+      port               = 80
+      protocol           = "HTTP"
+      target_group_index = 0
+    }
+
+    target_groups = {
+      name        = module.naming.resources.tg.name
+      protocol    = "HTTP"
+      port        = 4000
+      target_type = "ip"
+    }
+
+    create_security_group = false
+    security_groups       = [module.alb_sg.security_group_id]
+  }
+
+  sg = {
+    alb = {
+      name        = "${module.naming.resources.sg.name}-alb"
+      description = "Security Group for the Application Load Balancer that allows all inbound HTTP and HTTPS traffic"
+    }
+
+    ecs = {
+      name        = "${module.naming.resources.sg.name}-ecs-service"
+      description = "Security Group for the ECS Service that allows inbound traffic on the container port from the ALB"
+    }
   }
 }

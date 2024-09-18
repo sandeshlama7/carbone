@@ -32,7 +32,7 @@ module "ecs" {
             readonly_root_filesystem = false
             cpu                      = 512
             memory                   = 1024
-            image                    = "426857564226.dkr.ecr.us-east-1.amazonaws.com/prop-gen/pg:latest"
+            image                    = "${module.ecr.repository_url}:latest"
             port_mappings = [
               {
                 name          = "carbone-api"
@@ -54,5 +54,5 @@ module "ecs" {
       security_group_ids    = [module.ecs_sg.security_group_id]
       }
     }
-  
+
 }

@@ -24,24 +24,48 @@ module "ecs" {
 
   services = {
     carbone-service = {
-      cpu    = 512
-      memory = 1024
+      desired_count = 1
+      cpu           = 512
+      memory        = 1024
 
-        container_definitions = {
-          carbone-api = {
-            readonly_root_filesystem = false
-            cpu                      = 512
-            memory                   = 1024
-            image                    = "${module.ecr.repository_url}:latest"
-            port_mappings = [
-              {
-                name          = "carbone-api"
-                containerPort = 4000
-                protocol      = "tcp"
-              }
-            ]
+      container_definitions = {
+        carbone-api = {
+          readonly_root_filesystem = false
+          cpu                      = 512
+          memory                   = 1024
+          image                    = "${module.ecr.repository_url}:latest"
+          port_mappings = [
+            {
+              name          = "carbone-api"
+              containerPort = 4000
+              protocol      = "tcp"
+            }
+          ]
+          # Add mount points for the EFS volume
+          mountPoints = [
+            {
+              sourceVolume  = "efs-volume"
+              containerPath = "/mnt/efs" #Path where EFS will be mounted inside the container
+              readOnly      = false
+            }
+          ]
+        }
+      }
+
+      volumes = [
+        {
+          name = "efs-volume"
+          efsVolumeConfiguration = {
+            file_system_id     = module.efs.id
+            root_directory     = "/"
+            transit_encryption = "ENABLED"
+            authorization_config = {
+              access_point_id = module.efs.access_points
+            }
           }
         }
+      ]
+
       load_balancer = {
         service = {
           target_group_arn = module.alb.target_group_arns[0]
@@ -52,7 +76,7 @@ module "ecs" {
       create_security_group = local.ecs.create_security_group
       subnet_ids            = local.private_subnets_id
       security_group_ids    = [module.ecs_sg.security_group_id]
-      }
     }
+  }
 
 }

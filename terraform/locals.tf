@@ -71,4 +71,17 @@ locals {
       description = "Security Group for the ECS Service that allows inbound traffic on the container port from the ALB"
     }
   }
+
+  efs = {
+    name             = module.naming.resources.efs.name
+    creation_token   = "${module.naming.resources.prefix.name}-efs-creation-token"
+    encrypted        = true
+    performance_mode = "generalPurpose"
+    lifecycle_policy = {
+      transition_to_ia = "AFTER_30_DAYS"
+    }
+    security_group_name        = "${module.naming.resources.sg.name}-efs"
+    security_group_description = "Security Group for the EFS that allows inbound traffic from ECS Task"
+  }
+
 }

@@ -4,3 +4,4 @@ provider "aws" {
     tags = module.naming.default_tags
   }
 }
+

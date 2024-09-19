@@ -2,6 +2,8 @@ locals {
   region   = var.region
   cidr_all = "0.0.0.0/0"
 
+  ecr_repo = split("/", "${module.ecr.repository_url}")[0]
+
   ##### Naming
   project        = var.project
   project_short  = var.project_short
@@ -46,7 +48,6 @@ locals {
     http_tcp_listeners = {
       port               = 80
       protocol           = "HTTP"
-      target_group_index = 0
     }
 
     target_groups = {

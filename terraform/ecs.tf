@@ -2,6 +2,7 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
+  depends_on = [null_resource.image_push]
   cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
@@ -60,7 +61,7 @@ module "ecs" {
             root_directory     = "/"
             transit_encryption = "ENABLED"
             authorization_config = {
-              access_point_id = module.efs.access_points
+              access_point_id = module.efs.access_points.carbone.id
             }
           }
         }
@@ -68,7 +69,7 @@ module "ecs" {
 
       load_balancer = {
         service = {
-          target_group_arn = module.alb.target_group_arns[0]
+          target_group_arn = module.alb.target_groups["carbone"].arn
           container_name   = "carbone-api"
           container_port   = 4000
         }

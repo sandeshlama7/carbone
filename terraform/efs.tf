@@ -17,7 +17,7 @@ module "efs" {
   policy_statements = [
     {
       sid     = "AllowECSTOMountEFS"
-      effect = "Allow"
+      effect  = "Allow"
       actions = ["elasticfilesystem:ClientMount", "elasticfilesystem:ClientWrite"]
       principals = [
         {
@@ -53,15 +53,13 @@ module "efs" {
 
   # Access point(s)
   access_points = {
-    posix = {
-      name = "posix-carbone"
+    carbone = {
+      name = "carbone-access"
       posix_user = {
         gid            = 777
         uid            = 777
         secondary_gids = [888]
       }
-    }
-    carbone_root = {
       root_directory = {
         path = "/carbone"
         creation_info = {

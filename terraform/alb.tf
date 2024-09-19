@@ -1,27 +1,37 @@
 module "alb" {
-  source = "./modules/elb"
+  source  = "terraform-aws-modules/alb/aws"
+  # version = "9.11.0"
 
-  name               = local.alb.name
-  load_balancer_type = local.alb.load_balancer_type
-  vpc_id             = local.alb.vpc_id
-  subnets            = local.alb.subnets
-  internal           = local.alb.internal
+  name = local.alb.name
+  #   load_balancer_type = local.alb.load_balancer_type
+  vpc_id   = local.alb.vpc_id
+  subnets  = local.alb.subnets
+  internal = local.alb.internal
 
-  http_tcp_listeners = [{
-    port               = local.alb.http_tcp_listeners.port
-    protocol           = local.alb.http_tcp_listeners.protocol
-    target_group_index = local.alb.http_tcp_listeners.target_group_index
+  listeners = {
+    http = {
+      port     = local.alb.http_tcp_listeners.port
+      protocol = local.alb.http_tcp_listeners.protocol
+      forward = {
+        target_group_key = "carbone"
+        action_type      = "forward"
+      }
     }
-  ]
+  }
 
-  target_groups = [{
-    name             = local.alb.target_groups.name
-    backend_protocol = local.alb.target_groups.protocol
-    backend_port     = local.alb.target_groups.port
-    target_type      = local.alb.target_groups.target_type
+  target_groups = {
+    carbone = {
+      # name             = local.alb.target_groups.name
+      protocol         = local.alb.target_groups.protocol
+      port             = local.alb.target_groups.port
+      target_type      = local.alb.target_groups.target_type
+      create_attachment = false
+      health_check = {
+        enabled = true
+        interval = 60
+      }
     }
-  ]
-
+  }
   create_security_group = false
   security_groups       = local.alb.security_groups
 }

@@ -46,8 +46,8 @@ locals {
     internal           = false
 
     http_tcp_listeners = {
-      port               = 80
-      protocol           = "HTTP"
+      port     = 80
+      protocol = "HTTP"
     }
 
     target_groups = {

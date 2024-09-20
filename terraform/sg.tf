@@ -29,6 +29,13 @@ module "ecs_sg" {
       protocol                 = 6
       description              = "Container exposing port 4000. Allow traffic from ALB"
       source_security_group_id = module.alb_sg.security_group_id
+    },
+    {
+      from_port = 2049
+      to_port = 2049
+      protocol = 6
+      description = "Allow nfs traffic"
+      source_security_group_id = module.efs.security_group_id
     }
   ]
 

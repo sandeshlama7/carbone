@@ -1,9 +1,8 @@
 module "alb" {
-  source  = "terraform-aws-modules/alb/aws"
-  # version = "9.11.0"
+  source = "terraform-aws-modules/alb/aws"
+  version = "9.11.0"
 
   name = local.alb.name
-  #   load_balancer_type = local.alb.load_balancer_type
   vpc_id   = local.alb.vpc_id
   subnets  = local.alb.subnets
   internal = local.alb.internal
@@ -21,13 +20,13 @@ module "alb" {
 
   target_groups = {
     carbone = {
-      # name             = local.alb.target_groups.name
-      protocol         = local.alb.target_groups.protocol
-      port             = local.alb.target_groups.port
-      target_type      = local.alb.target_groups.target_type
+      name             = local.alb.target_groups.name
+      protocol          = local.alb.target_groups.protocol
+      port              = local.alb.target_groups.port
+      target_type       = local.alb.target_groups.target_type
       create_attachment = false
       health_check = {
-        enabled = true
+        enabled  = true
         interval = 60
       }
     }

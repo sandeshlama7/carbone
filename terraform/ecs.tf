@@ -2,7 +2,7 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
-  depends_on = [null_resource.image_push]
+  depends_on   = [null_resource.image_push]
   cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
@@ -46,14 +46,14 @@ module "ecs" {
           mountPoints = [
             {
               sourceVolume  = "efs-volume"
-              containerPath = "/mnt/efs" #Path where EFS will be mounted inside the container
+              containerPath = "/mnt" #Path where EFS will be mounted inside the container
               readOnly      = false
             }
           ]
         }
       }
 
-      volumes = [
+      volume = [
         {
           name = "efs-volume"
           efsVolumeConfiguration = {
@@ -62,6 +62,7 @@ module "ecs" {
             transit_encryption = "ENABLED"
             authorization_config = {
               access_point_id = module.efs.access_points.carbone.id
+              iam             = "ENABLED"
             }
           }
         }

@@ -22,7 +22,7 @@ module "efs" {
       principals = [
         {
           type        = "AWS"
-          identifiers = [module.ecs.services.carbone-service.task_exec_iam_role_arn]
+          identifiers = [module.ecs.services.carbone-service.task_exec_iam_role_arn, module.ecs.services.carbone-service.tasks_iam_role_arn]
         }
       ]
     }

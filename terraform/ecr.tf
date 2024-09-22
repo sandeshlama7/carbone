@@ -25,8 +25,13 @@ module "ecr" {
   })
 }
 
-resource "null_resource" "image_push" {
+resource "null_resource" "image_push_ecr" {
   depends_on = [module.ecr]
+
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<EOT
     aws ecr get-login-password --region ${local.region} | docker login --username AWS --password-stdin ${local.ecr_repo}

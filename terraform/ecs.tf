@@ -2,7 +2,7 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
-  depends_on   = [null_resource.image_push]
+  depends_on   = [ module.ecr, null_resource.image_push_ecr ]
   cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
@@ -25,6 +25,8 @@ module "ecs" {
 
   services = {
     carbone-service = {
+      enable_execute_command = true
+
       desired_count = 1
       cpu           = 512
       memory        = 1024
@@ -35,6 +37,7 @@ module "ecs" {
           cpu                      = 512
           memory                   = 1024
           image                    = "${module.ecr.repository_url}:latest"
+          # image = "426857564226.dkr.ecr.us-east-1.amazonaws.com/dm/dms-api:latest"
           port_mappings = [
             {
               name          = "carbone-api"
@@ -42,11 +45,18 @@ module "ecs" {
               protocol      = "tcp"
             }
           ]
+          #Set value for environment variables
+          environment = [
+            {
+            "name": "CARBONE_EE_STUDIO",
+            "value": true
+            }
+          ]
           # Add mount points for the EFS volume
-          mountPoints = [
+          mount_points = [
             {
               sourceVolume  = "efs-volume"
-              containerPath = "/mnt" #Path where EFS will be mounted inside the container
+              containerPath = "/app/template" #Path where EFS will be mounted inside the container
               readOnly      = false
             }
           ]

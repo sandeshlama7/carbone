@@ -44,6 +44,7 @@ locals {
     subnets            = local.public_subnets_id
     load_balancer_type = "application"
     internal           = false
+    enable_deletion_protection = false
 
     http_tcp_listeners = {
       port     = 80
@@ -83,6 +84,11 @@ locals {
     }
     security_group_name        = "${module.naming.resources.sg.name}-efs"
     security_group_description = "Security Group for the EFS that allows inbound traffic from ECS Task"
+  }
+
+  acm = {
+    validation_method = "DNS"
+    wait_for_validation = true
   }
 
 }

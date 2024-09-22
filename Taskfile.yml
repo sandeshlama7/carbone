@@ -1,0 +1,39 @@
+version: '3'
+
+vars:
+  TERRAFORM_DIR: "terraform"
+
+tasks:
+  terraform-plan:
+    desc: "Plan terraform "
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform init
+      - terraform validate
+      - terraform fmt
+      - terraform plan -var-file=dev.tfvars
+
+  terraform-destroy:
+    desc: "Apply terraform"
+    dir: "{{.TERRAFORM_DIR}}"
+    cmd:
+      - terraform apply -var-file=dev.tfvars -auto-approve
+    depends: ['terraform-plan']  
+
+
+  terraform-destroy:
+    desc: "Destroy Terraform"
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform destroy -var-file=dev.tfvars -auto-approve
+    depends: ['terraform-plan']
+
+  deploy:
+    desc: "Provision resources"
+    cmds:
+      - task terraform-apply
+
+  destroy:
+    desc: "Destroy resources"
+    cmds:
+      - task terraform-destroy

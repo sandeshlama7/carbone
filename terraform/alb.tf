@@ -6,14 +6,24 @@ module "alb" {
   vpc_id   = local.alb.vpc_id
   subnets  = local.alb.subnets
   internal = local.alb.internal
+  enable_deletion_protection = local.alb.enable_deletion_protection
 
   listeners = {
     http = {
       port     = local.alb.http_tcp_listeners.port
       protocol = local.alb.http_tcp_listeners.protocol
+      redirect = {
+        port = 443
+        protocol = "HTTPS"
+        status_code = "HTTP_301"
+      }
+    }
+    https = {
+      port = 443
+      protocol = "HTTPS"
+      certificate_arn = module.acm.acm_certificate_arn
       forward = {
         target_group_key = "carbone"
-        action_type      = "forward"
       }
     }
   }

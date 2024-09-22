@@ -2,7 +2,7 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
-  depends_on   = [ module.ecr, null_resource.image_push_ecr ]
+  depends_on   = [module.ecr, null_resource.image_push_ecr]
   cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
@@ -46,8 +46,8 @@ module "ecs" {
           ]
           environment = [
             {
-            "name": "CARBONE_EE_STUDIO",
-            "value": true
+              "name" : "CARBONE_EE_STUDIO",
+              "value" : true
             }
           ]
           mount_points = [

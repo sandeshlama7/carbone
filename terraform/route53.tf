@@ -9,7 +9,7 @@ module "route53_record" {
       name = local.project
       type = "A"
       alias = {
-        name = module.alb.dns_name
+        name    = module.alb.dns_name
         zone_id = module.alb.zone_id
       }
     }

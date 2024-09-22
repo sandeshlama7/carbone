@@ -39,11 +39,11 @@ locals {
   }
 
   alb = {
-    name               = module.naming.resources.alb.name
-    vpc_id             = local.vpc_id
-    subnets            = local.public_subnets_id
-    load_balancer_type = "application"
-    internal           = false
+    name                       = module.naming.resources.alb.name
+    vpc_id                     = local.vpc_id
+    subnets                    = local.public_subnets_id
+    load_balancer_type         = "application"
+    internal                   = false
     enable_deletion_protection = false
 
     http_tcp_listeners = {
@@ -87,7 +87,7 @@ locals {
   }
 
   acm = {
-    validation_method = "DNS"
+    validation_method   = "DNS"
     wait_for_validation = true
   }
 

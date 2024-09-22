@@ -37,7 +37,6 @@ module "ecs" {
           cpu                      = 512
           memory                   = 1024
           image                    = "${module.ecr.repository_url}:latest"
-          # image = "426857564226.dkr.ecr.us-east-1.amazonaws.com/dm/dms-api:latest"
           port_mappings = [
             {
               name          = "carbone-api"
@@ -45,14 +44,12 @@ module "ecs" {
               protocol      = "tcp"
             }
           ]
-          #Set value for environment variables
           environment = [
             {
             "name": "CARBONE_EE_STUDIO",
             "value": true
             }
           ]
-          # Add mount points for the EFS volume
           mount_points = [
             {
               sourceVolume  = "efs-volume"
@@ -90,5 +87,4 @@ module "ecs" {
       security_group_ids    = [module.ecs_sg.security_group_id]
     }
   }
-
 }

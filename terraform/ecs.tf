@@ -2,7 +2,6 @@ module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "5.11.4"
 
-  depends_on   = [module.ecr, null_resource.image_push_ecr]
   cluster_name = local.ecs.cluster_name
 
   cluster_configuration = {
@@ -36,7 +35,8 @@ module "ecs" {
           readonly_root_filesystem = false
           cpu                      = 512
           memory                   = 1024
-          image                    = "${module.ecr.repository_url}:latest"
+          # image                    = "${module.ecr.repository_url}:latest"
+          image = "${local.ecr_uri}:latest"
           port_mappings = [
             {
               name          = "carbone-api"

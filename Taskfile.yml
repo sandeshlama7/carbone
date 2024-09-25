@@ -33,7 +33,7 @@ tasks:
     cmds:
       - task terraform-apply
 
-  destroy:
+  delete:
     desc: "Destroy resources"
     cmds:
       - task terraform-destroy

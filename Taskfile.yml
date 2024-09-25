@@ -8,7 +8,7 @@ tasks:
     desc: "Plan resource provisioning with terraform"
     dir: "{{.TERRAFORM_DIR}}"
     cmds:
-      - terraform init
+      - terraform init 
       - terraform validate
       - terraform fmt
       - terraform plan -var-file=dev.tfvars
@@ -19,7 +19,6 @@ tasks:
     cmds:
       - terraform apply -var-file=dev.tfvars -auto-approve
     depends: ['terraform-plan']
-
 
   terraform-destroy:
     desc: "Clean up all the resources"

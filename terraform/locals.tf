@@ -3,7 +3,7 @@ locals {
   cidr_all = "0.0.0.0/0"
 
   ecr_repo = split("/", "${module.ecr.repository_url}")[0]
-  ecr_uri = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${local.region}.amazonaws.com/${local.project_prefix}/${local.project_short}"
+  ecr_uri  = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${local.region}.amazonaws.com/${local.project_prefix}/${local.project_short}"
 
   ##### Naming
   project        = var.project

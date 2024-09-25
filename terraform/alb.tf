@@ -30,10 +30,10 @@ module "alb" {
 
   target_groups = {
     carbone = {
-      name              = local.alb.target_groups.name
-      protocol          = local.alb.target_groups.protocol
-      port              = local.alb.target_groups.port
-      target_type       = local.alb.target_groups.target_type
+      name        = local.alb.target_groups.name
+      protocol    = local.alb.target_groups.protocol
+      port        = local.alb.target_groups.port
+      target_type = local.alb.target_groups.target_type
       health_check = {
         enabled  = true
         interval = 30

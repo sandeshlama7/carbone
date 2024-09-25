@@ -29,11 +29,11 @@ module "ecs" {
       desired_count = 1
       cpu           = 512
       memory        = 1024
-      network_mode = "awsvpc" #By default it is awsvpc
+      network_mode  = "awsvpc" #By default it is awsvpc
 
       container_definitions = {
         carbone-api = {
-          essential = true
+          essential                = true
           readonly_root_filesystem = false
           cpu                      = 512
           memory                   = 1024

@@ -55,7 +55,7 @@ module "ecs" {
           ]
           mount_points = [
             {
-              sourceVolume  = "efs-volume"
+              sourceVolume  = local.efs.name
               containerPath = "/app/template" #Path where EFS will be mounted inside the container
               readOnly      = false
             }
@@ -65,7 +65,7 @@ module "ecs" {
 
       volume = {
           (local.efs.name) = {
-          efsVolumeConfiguration = {
+          efs_volume_configuration = {
             file_system_id     = module.efs.id
             root_directory     = "/"
             transit_encryption = "ENABLED"

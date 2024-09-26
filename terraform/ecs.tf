@@ -24,14 +24,14 @@ module "ecs" {
 
   services = {
     carbone-service = {
-      enable_execute_command = true
-      wait_until_steady_state = true
-      wait_until_stable = true
+      enable_execute_command             = true
+      wait_until_steady_state            = true
+      wait_until_stable                  = true
       deployment_minimum_healthy_percent = 100
-      desired_count = 1
-      cpu           = 512
-      memory        = 1024
-      network_mode  = "awsvpc" #By default it is awsvpc
+      desired_count                      = 1
+      cpu                                = 512
+      memory                             = 1024
+      network_mode                       = "awsvpc" #By default it is awsvpc
 
       container_definitions = {
         carbone-api = {
@@ -39,12 +39,12 @@ module "ecs" {
           readonly_root_filesystem = false
           cpu                      = 512
           memory                   = 1024
-          image = "${local.ecr_uri}:latest"
+          image                    = "${local.ecr_uri}:latest"
           port_mappings = [
             {
               name          = "carbone-api"
               containerPort = 4000
-              hostPort = 4000
+              hostPort      = 4000
               protocol      = "tcp"
             }
           ]
@@ -65,7 +65,7 @@ module "ecs" {
       }
 
       volume = {
-          (local.efs.name) = {
+        (local.efs.name) = {
           efs_volume_configuration = {
             file_system_id     = module.efs.id
             root_directory     = "/"

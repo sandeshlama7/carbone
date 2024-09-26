@@ -25,7 +25,9 @@ module "ecs" {
   services = {
     carbone-service = {
       enable_execute_command = true
-
+      wait_until_steady_state = true
+      wait_until_stable = true
+      deployment_minimum_healthy_percent = 100
       desired_count = 1
       cpu           = 512
       memory        = 1024
@@ -37,7 +39,6 @@ module "ecs" {
           readonly_root_filesystem = false
           cpu                      = 512
           memory                   = 1024
-          # image                    = "${module.ecr.repository_url}:latest"
           image = "${local.ecr_uri}:latest"
           port_mappings = [
             {

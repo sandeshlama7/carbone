@@ -1,0 +1,53 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "dotenv-cli@latest": {
+      "last_modified": "2024-09-10T15:01:03Z",
+      "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#dotenv-cli",
+      "source": "devbox-search",
+      "version": "7.4.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/azi03n7k2bwppinj086yjm8wx27h64qg-dotenv-cli-7.4.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/azi03n7k2bwppinj086yjm8wx27h64qg-dotenv-cli-7.4.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8il4zd0bjj27m4jdhihvwz1i8x5z3910-dotenv-cli-7.4.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8il4zd0bjj27m4jdhihvwz1i8x5z3910-dotenv-cli-7.4.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/abl0kkdbpn8ymkaimnclvxm11y7x3hza-dotenv-cli-7.4.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/abl0kkdbpn8ymkaimnclvxm11y7x3hza-dotenv-cli-7.4.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/bci4n5ymz53z5ib27nqvxhifcl3kjcyi-dotenv-cli-7.4.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/bci4n5ymz53z5ib27nqvxhifcl3kjcyi-dotenv-cli-7.4.3"
+        }
+      }
+    }
+  }
+}

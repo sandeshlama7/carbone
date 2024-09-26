@@ -61,7 +61,7 @@ module "efs" {
         secondary_gids = [888]
       }
       root_directory = {
-        path = "/carbone"
+        path = "/opt/carbone"
         creation_info = {
           owner_gid   = 777
           owner_uid   = 777

@@ -43,6 +43,7 @@ module "ecs" {
             {
               name          = "carbone-api"
               containerPort = 4000
+              hostPort = 4000
               protocol      = "tcp"
             }
           ]
@@ -62,9 +63,8 @@ module "ecs" {
         }
       }
 
-      volume = [
-        {
-          name = "efs-volume"
+      volume = {
+          (local.efs.name) = {
           efsVolumeConfiguration = {
             file_system_id     = module.efs.id
             root_directory     = "/"
@@ -75,7 +75,7 @@ module "ecs" {
             }
           }
         }
-      ]
+      }
 
       load_balancer = {
         service = {

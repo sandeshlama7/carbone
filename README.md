@@ -27,7 +27,9 @@ After aws cli is installed we need to configure it with our credentials. To conf
 
 ### Step 5: Install other dependencies: Terraform, Taskfile and Docker CLI:
 Refer to this link for installing Terraform: [Install Terraform | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
 Refer to this link for installing Taskfile: [Installation | Task](https://taskfile.dev/installation/)
+
 Refer to this link for installing Docker CLI: [Install](https://docs.docker.com/engine/install/)
 
 #### Alternatively,

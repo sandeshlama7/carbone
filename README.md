@@ -46,8 +46,11 @@ devbox add awscli2@2.17.18 terraform@1.9.5 dotenv-cli@7.4.3 docker@27.2.0 go-tas
 ### Step 6: Use Taskfile to automate the infrastructure provisioning and cleanup.
 i) To check the plan of the terraform, run:
 `task init-plan`
+
 ii) To provision the resources, run:
 `task deploy`
+
 iii) To destroy all the resources, run:
 `task delete`
+
 To change the project specific variables, Change the variables from `dev.tfvars` file in the terraform directory

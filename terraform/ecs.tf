@@ -59,6 +59,11 @@ module "ecs" {
               sourceVolume  = local.efs.name
               containerPath = "/app/template" #Path where EFS will be mounted inside the container
               readOnly      = false
+            },
+            {
+              sourceVolume = local.efs.name
+              containerPath = "/app/render"
+              readOnly = false
             }
           ]
         }

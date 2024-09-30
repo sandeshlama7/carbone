@@ -29,16 +29,16 @@ module "ecs" {
       wait_until_stable                  = true
       deployment_minimum_healthy_percent = 100
       desired_count                      = 1
-      cpu                                = 512
-      memory                             = 1024
+      cpu                                = 1024
+      memory                             = 2048
       network_mode                       = "awsvpc" #By default it is awsvpc
 
       container_definitions = {
         carbone-api = {
           essential                = true
           readonly_root_filesystem = false
-          cpu                      = 512
-          memory                   = 1024
+          cpu                      = 1024
+          memory                   = 2048
           image                    = "${local.ecr_uri}:latest"
           port_mappings = [
             {

@@ -4,8 +4,8 @@ module "ecr" {
 
   repository_name         = local.ecr.repository_name
   repository_force_delete = true
+  repository_image_tag_mutability = "MUTABLE"
 
-  #   repository_read_write_access_arns = 
   repository_lifecycle_policy = jsonencode({
     rules = [
       {
@@ -34,6 +34,7 @@ resource "null_resource" "image_push_ecr" {
 
   provisioner "local-exec" {
     command = <<EOT
+    docker pull carbone/carbone-ee
     aws ecr get-login-password --region ${local.region} | docker login --username AWS --password-stdin ${local.ecr_repo}
     docker tag carbone/carbone-ee ${module.ecr.repository_url}:latest
     docker push ${module.ecr.repository_url}:latest

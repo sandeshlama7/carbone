@@ -3,7 +3,7 @@ module "ecs" {
   version = "5.11.4"
 
   cluster_name = local.ecs.cluster_name
-
+  depends_on = [module.alb]
   cluster_configuration = {
     execute_command_configuration = {
       logging = "OVERRIDE"
@@ -61,9 +61,9 @@ module "ecs" {
               readOnly      = false
             },
             {
-              sourceVolume = local.efs.name
+              sourceVolume  = local.efs.name
               containerPath = "/app/render"
-              readOnly = false
+              readOnly      = false
             }
           ]
         }

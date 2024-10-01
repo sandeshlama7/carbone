@@ -36,7 +36,7 @@ Refer to this link for installing Docker CLI: [Install](https://docs.docker.com/
 Instead of installing all the project dependencies gloablly, for managing dependencies, you can install **Devbox** (isolated environments) and initialize it in your project directory:
 * Install Devbox:
 `curl -fsSL https://get.jetify.com/devbox | bash`
-* To create a new development environment with the packages you need, Initialize devbox and add the packages you need
+* To create a new development environment with the packages you need, Initialize devbox and add the packages you need:
 ```
 devbox init
 devbox add awscli2@2.17.18 terraform@1.9.5 dotenv-cli@7.4.3 docker@27.2.0 go-task@3.38.0

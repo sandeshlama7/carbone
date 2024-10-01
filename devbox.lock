@@ -66,8 +66,8 @@
       }
     },
     "docker@27.2.0": {
-      "last_modified": "2024-09-19T11:39:46Z",
-      "resolved": "github:NixOS/nixpkgs/268bb5090a3c6ac5e1615b38542a868b52ef8088#docker",
+      "last_modified": "2024-09-24T01:22:05Z",
+      "resolved": "github:NixOS/nixpkgs/189e5f171b163feb7791a9118afa778d9a1db81f#docker",
       "source": "devbox-search",
       "version": "27.2.0",
       "systems": {
@@ -75,41 +75,41 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/dq60rw3m68bzcvkr7n1n1la82il33vpn-docker-27.2.0",
+              "path": "/nix/store/kzrab03hkhq9dkhcaqhmyv5gkak1da08-docker-27.2.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/dq60rw3m68bzcvkr7n1n1la82il33vpn-docker-27.2.0"
+          "store_path": "/nix/store/kzrab03hkhq9dkhcaqhmyv5gkak1da08-docker-27.2.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/3dslblj4v2kdd1nlfmkq6b60av5rl9ay-docker-27.2.0",
+              "path": "/nix/store/9yh9algj8y7zkc6g6r84mwx3nx0gi0z6-docker-27.2.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/3dslblj4v2kdd1nlfmkq6b60av5rl9ay-docker-27.2.0"
+          "store_path": "/nix/store/9yh9algj8y7zkc6g6r84mwx3nx0gi0z6-docker-27.2.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/xb8d5lcgcp2vr6fmy649dfwagkxzrjlw-docker-27.2.0",
+              "path": "/nix/store/c0ajppzmyjssahqg26q937q1akszx4qj-docker-27.2.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/xb8d5lcgcp2vr6fmy649dfwagkxzrjlw-docker-27.2.0"
+          "store_path": "/nix/store/c0ajppzmyjssahqg26q937q1akszx4qj-docker-27.2.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/r4p9kjvzj8amd4pc217gf098p8p2bgi8-docker-27.2.0",
+              "path": "/nix/store/p1ljbzhhlvqbcyn5mf8bbnqlk4qap7gm-docker-27.2.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/r4p9kjvzj8amd4pc217gf098p8p2bgi8-docker-27.2.0"
+          "store_path": "/nix/store/p1ljbzhhlvqbcyn5mf8bbnqlk4qap7gm-docker-27.2.0"
         }
       }
     },

@@ -12,14 +12,15 @@ tasks:
     cmds:
       - terraform init -backend-config "bucket={{.bucket}}" -backend-config "dynamodb_table={{.dynamodb_table}}" --backend-config "acl={{.acl}}"  -backend-config "key={{.key}}" -backend-config "region={{.region}}"
       - terraform validate
-      - terraform fmt
+      - terraform fmt --check
       - terraform plan -var-file=dev.tfvars
 
   deploy:
     desc: "Provision all the resources"
     dir: "{{.TERRAFORM_DIR}}"
     cmds:
-      - terraform apply -var-file=dev.tfvars -auto-approve
+      - aws ecr get-login-password --region {{.region}} | docker login --username AWS --password-stdin {{.ecr_repo}}
+      - terraform apply -var-file=dev.tfvars -auto-approve 
     depends: ['terraform-plan']
 
   delete:

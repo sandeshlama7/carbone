@@ -19,14 +19,12 @@ tasks:
     desc: "Provision all the resources"
     dir: "{{.TERRAFORM_DIR}}"
     cmds:
-      - aws ecr get-login-password --region {{.region}} | docker login --username AWS --password-stdin {{.ecr_repo}}
-      - terraform apply -var-file=dev.tfvars -auto-approve 
-    depends: ['terraform-plan']
+      - terraform apply -var-file=dev.tfvars -auto-approve
+    depends: ['init-plan']
 
   delete:
     desc: "Clean up all the resources"
     dir: "{{.TERRAFORM_DIR}}"
     cmds:
       - terraform destroy -var-file=dev.tfvars -auto-approve
-    depends: ['terraform-plan']
-
+    depends: ['init-plan']

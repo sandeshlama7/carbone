@@ -39,6 +39,6 @@ resource "null_resource" "image_push_ecr" {
     docker tag carbone/carbone-ee ${module.ecr.repository_url}:latest
     docker push ${module.ecr.repository_url}:latest
     EOT
-    
+
   }
 }

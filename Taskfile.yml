@@ -18,13 +18,13 @@ tasks:
   deploy:
     desc: "Provision all the resources"
     dir: "{{.TERRAFORM_DIR}}"
+    deps: ['init-plan']
     cmds:
       - terraform apply -var-file=dev.tfvars -auto-approve
-    depends: ['init-plan']
 
   delete:
     desc: "Clean up all the resources"
     dir: "{{.TERRAFORM_DIR}}"
+    deps: ['init-plan']
     cmds:
       - terraform destroy -var-file=dev.tfvars -auto-approve
-    depends: ['init-plan']

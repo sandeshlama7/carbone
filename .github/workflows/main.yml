@@ -10,7 +10,7 @@ on:
 env:
   tf_dir: terraform
   backend_bucket: ${{secrets.BACKEND_BUCKET}}
-  backend_key: "test/taiga.tfstate"
+  backend_key: "carbone/tf.tfstate"
   backend_acl: "bucket-owner-full-control"
   backend_region: "ap-south-1"
   region: "us-east-1"

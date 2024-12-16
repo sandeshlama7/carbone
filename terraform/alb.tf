@@ -9,21 +9,24 @@ module "alb" {
   enable_deletion_protection = local.alb.enable_deletion_protection
 
   listeners = {
-    https = {
-      port            = 443
-      protocol        = "HTTPS"
-      certificate_arn = module.acm.acm_certificate_arn
-      forward = {
-        target_group_key = "carbone"
-      }
-    }
+    # https = {
+    #   port            = 443
+    #   protocol        = "HTTPS"
+    #   certificate_arn = module.acm.acm_certificate_arn
+    #   forward = {
+    #     target_group_key = "carbone"
+    #   }
+    # }
     http = {
       port     = local.alb.http_tcp_listeners.port
       protocol = local.alb.http_tcp_listeners.protocol
-      redirect = {
-        port        = 443
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
+      # redirect = {
+      #   port        = 443
+      #   protocol    = "HTTPS"
+      #   status_code = "HTTP_301"
+      # }
+      forward = {
+        target_group_key = "carbone"
       }
     }
   }

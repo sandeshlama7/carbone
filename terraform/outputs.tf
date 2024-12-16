@@ -9,6 +9,3 @@ output "default_tags" {
 output "efs_ap" {
   value = module.efs.access_points
 }
-output "domain_name" {
-  value = module.route53_record.route53_record_name
-}

@@ -4,7 +4,7 @@
 Follow these steps for deploying the application:
 
 ### Step 1: Clone the Git repository:
-`git clone git@github.com:adexltd/adex-suite-proposal_generator.git <directory-name>`
+`git clone git@github.com:sandeshlama7/carbone.git <directory-name>`
 
 ### Step 2: Change into the project directory:
 `cd <directory-name>`

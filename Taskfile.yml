@@ -1,0 +1,30 @@
+version: '3'
+
+dotenv: ['.env']
+
+vars:
+  TERRAFORM_DIR: "terraform"
+
+tasks:
+  init-plan:
+    desc: "Plan resource provisioning with terraform"
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform init -backend-config "bucket={{.bucket}}" -backend-config "dynamodb_table={{.dynamodb_table}}" --backend-config "acl={{.acl}}"  -backend-config "key={{.key}}" -backend-config "region={{.region}}"
+      - terraform validate
+      - terraform fmt --check
+      - terraform plan -var-file=dev.tfvars
+
+  deploy:
+    desc: "Provision all the resources"
+    dir: "{{.TERRAFORM_DIR}}"
+    deps: ['init-plan']
+    cmds:
+      - terraform apply -var-file=dev.tfvars -auto-approve
+
+  delete:
+    desc: "Clean up all the resources"
+    dir: "{{.TERRAFORM_DIR}}"
+    deps: ['init-plan']
+    cmds:
+      - terraform destroy -var-file=dev.tfvars -auto-approve
